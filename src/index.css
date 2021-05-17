@@ -12,3 +12,33 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.main {
+  display: flex;
+}
+
+.pokemons-list {
+  border-right: 1px solid;
+}
+
+.pokemons-list,
+.pokedex {
+  padding: 0 50px 20px;
+  border-bottom: 1px solid;
+  flex-grow: 1;
+}
+
+.pokedex {
+  min-width: 400px;
+}
+
+.form-wrapper {
+  margin-top: 20px;
+  text-align: center;
+}
+
+
+.container {
+  display: flex; /* or inline-flex */
+  flex-wrap: wrap;
+}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {PokemonProvider} from "./PokemonContext";
 import PokemonsList from "./PokemonsList";
+import Pokedex from "./Pokedex";
 
 
 
@@ -49,7 +50,7 @@ function App() {
         <PokemonProvider>
             <div className="main">
                 <PokemonsList />
-                {/*<Pokedex />*/}
+                <Pokedex />
             </div>
 
         </PokemonProvider>
