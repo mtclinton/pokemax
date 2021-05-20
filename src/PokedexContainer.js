@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { PokemonContext } from './PokemonContext';
+import Pokedex from "./nologic/Pokedex";
 
 function Card({ pokemon }) {
     return (
@@ -14,12 +15,14 @@ function Card({ pokemon }) {
     );
 }
 
-const Pokedex = () => {
+const PokedexContainer = () => {
     const { capturedPokemons, release } = useContext(PokemonContext);
 
     return (
-        <div className="pokedex">
+        <div className="pokedex-container">
             <h2>Pokedex</h2>
+
+            <Pokedex />
 
 
             <div>
@@ -31,4 +34,4 @@ const Pokedex = () => {
     )
 }
 
-export default Pokedex;
+export default PokedexContainer;

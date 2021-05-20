@@ -1,14 +1,16 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { PokemonContext } from './PokemonContext';
 
-function Card({ pokemon }) {
+function Card({ pokemon, onClick}) {
+
+    const imageClick = () => {
+        console.log('Click');
+    }
+
     return (
         <div className="Card">
             <div className="img">
-                <img src={pokemon.sprites.front_default} alt="" />
-            </div>
-            <div className="name">
-                {pokemon.name}
+                <img src={`origin/${pokemon.name}.gif`} height={150} width={150} alt="" onClick={onClick(pokemon)} />
             </div>
         </div>
     );
@@ -17,7 +19,6 @@ function Card({ pokemon }) {
 const PokemonsList = () => {
     const { pokemons, capture, addPokemons } = useContext(PokemonContext);
 
-    const [pokemonData, setPokemonData] = useState([])
     const [loading, setLoading] = useState(true);
     const initialURL = 'https://pokeapi.co/api/v2/pokemon'
 
@@ -77,7 +78,7 @@ const PokemonsList = () => {
                 {loading ? <h1 style={{ textAlign: 'center' }}>Loading...</h1> : (
                     <div className="container">
                         {pokemons.map((pokemon, i) => {
-                            return <Card key={i} pokemon={pokemon} />
+                            return <Card key={i} pokemon={pokemon} onClick={capture}/>
                         })}
                     </div>
                 )}

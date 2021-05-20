@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import { CAPTURE, RELEASE, ADD_POKEMON, ADD_POKEMONS } from './actions';
+import { CAPTURE, RELEASE, ADD_POKEMON, ADD_POKEMONS, SHOW_POKEMON } from './actions';
 
 const getCapturedPokemons = (capturedPokemons, releasedPokemon) =>
     capturedPokemons.filter(pokemon => pokemon !== releasedPokemon)
@@ -14,7 +14,14 @@ const getPokemonsList = (pokemons, capturedPokemon) =>
 
 const capturePokemon = (pokemon, state) => ({
     pokemons: getPokemonsList(state.pokemons, pokemon),
-    capturedPokemons: [...state.capturedPokemons, pokemon]
+    capturedPokemons: [...state.capturedPokemons, pokemon],
+    pokedexPokemon: [pokemon]
+});
+
+const showPokemon = (pokemon, state) => ({
+    pokemons: state.pokemons, pokemon,
+    capturedPokemons: state.capturedPokemons,
+    pokedexPokemon: [pokemon]
 });
 
 const addPokemon = (pokemon, state) => ({
@@ -33,6 +40,8 @@ const pokemonReducer = (state, action) => {
             return capturePokemon(action.pokemon, state);
         case RELEASE:
             return releasePokemon(action.pokemon, state);
+        case SHOW_POKEMON:
+            return showPokemon(action.pokemon, state);
         case ADD_POKEMON:
             return addPokemon(action.pokemon, state);
         case ADD_POKEMONS:
@@ -45,5 +54,6 @@ const pokemonReducer = (state, action) => {
 export const usePokemonReducer = () =>
     useReducer(pokemonReducer, {
         pokemons: [],
-        capturedPokemons: []
+        capturedPokemons: [],
+        pokedexPokemon: []
     });
