@@ -20,7 +20,6 @@ function LeftPanel(props) {
         no = 0;
 
     }
-    console.log(name)
 
 
     return (

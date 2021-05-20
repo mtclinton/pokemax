@@ -24,8 +24,7 @@ function Pokedex() {
         //     setLoading(false);
         // }
         // fetchData();
-        console.log('called useeffect pokedex')
-        console.log(pokedexPokemon)
+
 
 
         if(pokedexPokemon && pokedexPokemon.length){
@@ -43,7 +42,6 @@ function Pokedex() {
                     )
 
                     const evo_chain = data.evolution_chain.url;
-                    console.log('evo chain '+evo_chain);
                     fetch(evo_chain)
                         .then(response => response.json())
                         .then(data => {
@@ -82,8 +80,6 @@ function Pokedex() {
                         });
                 });
         }
-        console.log('sprites ' + evoSprites);
-        console.log('description  '+description);
 
 
 

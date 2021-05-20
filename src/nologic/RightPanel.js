@@ -10,13 +10,14 @@ import PokedexControls from "./PokedexControls";
 function RightPanel(props) {
 
     const {pokemon, evoSprites, evoNames} = props;
-    console.log(props)
 
     let stats;
     let types;
 
     let sprites;
     let names;
+
+    let moves;
 
     if(pokemon && pokemon.length) {
         stats = pokemon[0].stats;
@@ -42,6 +43,11 @@ function RightPanel(props) {
         names = [];
     }
 
+    if(pokemon && pokemon.length) {
+        moves = pokemon[0].moves;
+    } else {
+        moves = [];
+    }
 
     return (
         <div className="panel right-panel">
@@ -52,7 +58,8 @@ function RightPanel(props) {
 
             <PokemonEvolution sprites={sprites} names={names} />
             <ButtonChrome />
-            <MoveList/>
+            <MoveList moves={moves} />
+
             <PokedexControls />
         </div>
     );
