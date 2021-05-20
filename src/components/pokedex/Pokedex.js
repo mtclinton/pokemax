@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import Divider from "./Divider";
 import LeftPanel from "./LeftPanel";
 import RightPanel from "./RightPanel";
-import {PokemonContext} from "../PokemonContext";
+import {PokemonContext} from "../../PokemonContext";
 
 function Pokedex() {
 

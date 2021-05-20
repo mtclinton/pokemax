@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { PokemonContext } from './PokemonContext';
-import Pokedex from "./nologic/Pokedex";
+import Pokedex from "./components/pokedex/Pokedex";
 
 function Card({ pokemon }) {
     return (

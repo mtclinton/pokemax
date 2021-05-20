@@ -1,7 +1,7 @@
 public/origin
 public/origin/*
-src/components/pokedex
-src/components/pokedex/*
+src/ref
+src/ref/*
 .idea
 .idea/
 .DS_STORE
