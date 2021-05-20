@@ -7,7 +7,6 @@ import PokemonDescription from "./PokemonDescription";
 function LeftPanel(props) {
 
     const {pokemon, description} = props;
-    console.log(props)
 
     let name;
     let no;

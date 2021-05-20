@@ -8,7 +8,7 @@ function Pokedex() {
 
     const { pokedexPokemon } = useContext(PokemonContext);
 
-    const [evoSprites, setEvoSprites] = useState([]);
+    const [evoSprites, setEvoSprite] = useState([]);
     const [evoNames, setEvoNames] = useState([]);
     const [description, setDescription] = useState([]);
 
@@ -41,7 +41,9 @@ function Pokedex() {
                             data.flavor_text_entries.filter(e => e.language.name === "en").map(e => e.flavor_text)
                         )
                     )
+
                     const evo_chain = data.evolution_chain.url;
+                    console.log('evo chain '+evo_chain);
                     fetch(evo_chain)
                         .then(response => response.json())
                         .then(data => {
@@ -65,17 +67,24 @@ function Pokedex() {
                                 const e3 = fetch(`${api}${third.species.name}/`);
                                 evos.push(e3);
                             }
+
+
                             Promise.all(evos)
                                 .then(responses => Promise.all(responses.map(value => value.json())))
                                 .then(dataList => {
                                     const sprites = dataList.map(v => v.sprites.front_default);
                                     const names = dataList.map(n => n.name);
-                                    setEvoSprites(sprites);
+
+                                    setEvoSprite(sprites)
+
                                     setEvoNames(names);
                                 });
                         });
                 });
         }
+        console.log('sprites ' + evoSprites);
+        console.log('description  '+description);
+
 
 
 
