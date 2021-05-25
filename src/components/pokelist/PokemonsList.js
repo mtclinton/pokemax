@@ -1,11 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { PokemonContext } from './PokemonContext';
+import { PokemonContext } from '../../PokemonContext';
 
 function Card({ pokemon, onClick}) {
-
-    const imageClick = () => {
-        console.log('Click');
-    }
 
     return (
         <div className="Card">
@@ -61,18 +57,6 @@ const PokemonsList = () => {
     return (
         <div className="pokemons-list">
             <h2>Pokemons List</h2>
-
-            {/*<table>*/}
-            {/*    <tr>*/}
-            {/*        <th>Pokemon</th>*/}
-            {/*        <th>Capture</th>*/}
-            {/*    </tr>*/}
-            {/*    {listPokemons({*/}
-            {/*        pokemons,*/}
-            {/*        onClick: capture,*/}
-            {/*        buttonLabel: '+'*/}
-            {/*    })}*/}
-            {/*</table>*/}
 
             <div>
                 {loading ? <h1 style={{ textAlign: 'center' }}>Loading...</h1> : (

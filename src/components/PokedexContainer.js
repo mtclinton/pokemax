@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { PokemonContext } from './PokemonContext';
+import { PokemonContext } from '../PokemonContext';
+import Pokedex from "./pokedex/Pokedex";
 
 function Card({ pokemon }) {
     return (
@@ -14,15 +15,17 @@ function Card({ pokemon }) {
     );
 }
 
-const Pokedex = () => {
+const PokedexContainer = () => {
     const { capturedPokemons, release } = useContext(PokemonContext);
 
     return (
-        <div className="pokedex">
+        <div className="pokedex-container">
             <h2>Pokedex</h2>
 
+            <Pokedex />
 
-            <div>
+
+            <div className="captured-container">
                 {capturedPokemons.map((pokemon, i) => {
                     return <Card key={i} pokemon={pokemon} />
                 })}
@@ -31,4 +34,4 @@ const Pokedex = () => {
     )
 }
 
-export default Pokedex;
+export default PokedexContainer;

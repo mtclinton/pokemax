@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import { CAPTURE, RELEASE, ADD_POKEMON, ADD_POKEMONS, SHOW_POKEMON } from './actions';
+import { CAPTURE, RELEASE, ADD_POKEMON, ADD_POKEMONS, SHOW_POKEMON } from '../actions';
 
 const getCapturedPokemons = (capturedPokemons, releasedPokemon) =>
     capturedPokemons.filter(pokemon => pokemon !== releasedPokemon)

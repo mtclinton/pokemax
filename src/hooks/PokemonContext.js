@@ -1,6 +1,6 @@
 import React, { createContext } from 'react';
-import { usePokemonReducer } from './usePokemonReducer';
-import { CAPTURE, RELEASE, ADD_POKEMON, ADD_POKEMONS, SHOW_POKEMON } from './actions';
+import { usePokemonReducer } from '../usePokemonReducer';
+import { CAPTURE, RELEASE, ADD_POKEMON, ADD_POKEMONS, SHOW_POKEMON } from '../actions';
 
 const PokemonContext = createContext();
 
