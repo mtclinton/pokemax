@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { PokemonContext } from '../PokemonContext';
+import { PokemonContext } from '../hooks/PokemonContext';
 import Pokedex from "./pokedex/Pokedex";
 
 function Card({ pokemon }) {

@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import {PokemonProvider} from "./PokemonContext";
-import PokemonsList from "./PokemonsList";
-import Pokedex from "./Pokedex";
-import PokedexContainer from "./PokedexContainer";
+import {PokemonProvider} from "./hooks/PokemonContext";
+import PokemonsList from "./components/pokelist/PokemonsList";
+import PokedexContainer from "./components/PokedexContainer";
 
 
 

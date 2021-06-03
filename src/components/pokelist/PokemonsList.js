@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { PokemonContext } from '../../PokemonContext';
+import { PokemonContext } from '../../hooks/PokemonContext';
 
 function Card({ pokemon, onClick}) {
 
