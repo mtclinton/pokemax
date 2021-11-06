@@ -1,5 +1,6 @@
 import { useReducer } from 'react';
 import { CAPTURE, RELEASE, ADD_POKEMON, ADD_POKEMONS, SHOW_POKEMON } from './actions';
+import PokemonStats from "../components/pokedex/PokemonStats";
 
 const getCapturedPokemons = (capturedPokemons: [], releasePokemon: string) =>
     capturedPokemons.filter(pokemon => pokemon !== releasePokemon)
@@ -19,7 +20,7 @@ const capturePokemon = (pokemon: string, state: PokemonState) => ({
 });
 
 const showPokemon = (pokemon: string, state: PokemonState) => ({
-    pokemons: state.pokemons, pokemon,
+    pokemons: state.pokemons,   /// don't change the pokemons state just changing which pokemon is shown on pokedex
     capturedPokemons: state.capturedPokemons,
     pokedexPokemon: [pokemon]
 });
@@ -49,15 +50,15 @@ interface PokemonAction {
 const pokemonReducer = (state: PokemonState, action: PokemonAction): PokemonState => {
     switch (action.type) {
         case CAPTURE:
-            return capturePokemon(action.pokemon, state);
+            return capturePokemon(action.pokemon, state) as PokemonState;
         case RELEASE:
-            return releasePokemon(action.pokemon, state);
+            return releasePokemon(action.pokemon, state) as PokemonState;
         case SHOW_POKEMON:
-            return showPokemon(action.pokemon, state);
+            return showPokemon(action.pokemon, state) as PokemonState;
         case ADD_POKEMON:
-            return addPokemon(action.pokemon, state);
+            return addPokemon(action.pokemon, state) as PokemonState;
         case ADD_POKEMONS:
-            return addPokemons(action.pokemons, state);
+            return addPokemons(action.pokemons, state) as PokemonState;
         default:
             return state;
     }
