@@ -1,8 +1,7 @@
 import {PokemonProvider} from "./hooks/PokemonContext";
 import PokemonsList from "./components/pokelist/PokemonsList";
 import PokedexContainer from "./components/PokedexContainer";
-
-
+import React from "react";
 
 function App() {
 

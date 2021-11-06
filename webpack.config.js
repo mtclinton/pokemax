@@ -5,16 +5,23 @@ const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     context: __dirname,
-    entry: './src/index.js',
+    entry: './src/index.tsx',
+    resolve: {
+        extensions: ['.ts', '.tsx', '.js', '.jsx', '.scss'],
+    },
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader',
-                options: {
-                    presets: ["@babel/preset-react"]
-                }
+                test: /\.(png|jpe?g|gif)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                    },
+                ],
+            },
+            {
+                test: /\.tsx?$/,
+                use: 'ts-loader',
             },
             {
                 test: /\.css$/,
@@ -23,8 +30,13 @@ module.exports = {
                     { loader: MiniCssExtractPlugin.loader },
                     {
                         loader: 'css-loader',
-
+                        options: {
+                            modules: {
+                                localIdentName: '[name]__[local]___[hash:base64:5]',
+                            }
+                        },
                     },
+                    'postcss-loader'
                 ],
             },
             {
@@ -56,11 +68,6 @@ module.exports = {
             filename: "[hash].css",
             chunkFilename: "[id]--[hash].css",
             ignoreOrder: false
-        }),
-        new CopyPlugin({
-            patterns: [
-                { from: "public/origin", to: "origin" },
-            ],
         }),
     ],
     target: 'web'

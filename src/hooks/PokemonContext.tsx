@@ -4,7 +4,11 @@ import { CAPTURE, RELEASE, ADD_POKEMON, ADD_POKEMONS, SHOW_POKEMON } from './act
 
 const PokemonContext = createContext();
 
-const PokemonProvider = (props) => {
+type Props = {
+    children: React.ReactNode;
+};
+
+const PokemonProvider = ({ children }: Props) => {
     const [state, dispatch] = usePokemonReducer();
     const { pokemons, capturedPokemons, pokedexPokemon } = state;
 
@@ -29,7 +33,7 @@ const PokemonProvider = (props) => {
 
     return (
         <PokemonContext.Provider value={providerValue}>
-            {props.children}
+            {children}
         </PokemonContext.Provider>
     )
 };
