@@ -2,11 +2,15 @@ import React, { useContext } from 'react';
 import { PokemonContext } from '../hooks/PokemonContext';
 import Pokedex from "./pokedex/Pokedex";
 
-function Card({ pokemon }) {
+import {Pokemon} from "../types";
+
+// Pokemon type just has the name as an attribute
+
+function Card( pokemon: Pokemon ) {
     return (
         <div className="Card">
             <div className="img">
-                <img src={`https://projectpokemon.org/images/normal-sprite/${pokemon.name}.gif`}alt="" />
+                <img src={`https://projectpokemon.org/images/normal-sprite/${pokemon.name}.gif`} alt="" />
             </div>
             <div className="name">
                 {pokemon.name}
@@ -27,7 +31,7 @@ const PokedexContainer = () => {
 
             <div className="captured-container">
                 {capturedPokemons.map((pokemon, i) => {
-                    return <Card key={i} pokemon={pokemon} />
+                    return <Card  name={pokemon}/>
                 })}
             </div>
         </div>

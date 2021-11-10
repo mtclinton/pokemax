@@ -1,8 +1,27 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { PokemonContext } from '../../hooks/PokemonContext';
+import {Pokemon} from "../../types";
 
-function Card({ pokemon, onClick}) {
+interface ApiPokemon {
+    name: string,
+    url: string,
+}
 
+interface ApiResult {
+    count: number,
+    next: string,
+    previous: null|string,
+    result:[]
+}
+
+interface CardProp {
+    key: number,
+    pokemon: Pokemon,
+    onClick: Function
+}
+
+function Card(props: CardProp) {
+    let { key, pokemon, onClick} = props;
     return (
         <div className="Card">
             <div className="img">
@@ -18,17 +37,17 @@ const PokemonsList = () => {
     const [loading, setLoading] = useState(true);
     const initialURL = 'https://pokeapi.co/api/v2/pokemon'
 
-    function getPokemon({ url }) {
+    function getPokemon(pokemon: ApiPokemon ) {
         return new Promise((resolve, reject) => {
-            fetch(url).then(res => res.json())
+            fetch(pokemon.url).then(res => res.json())
                 .then(data => {
                     resolve(data)
                 })
         });
     }
 
-    async function getAllPokemon(url) {
-        return new Promise((resolve, reject) => {
+    async function getAllPokemon(url: string) {
+        return new Promise<ApiResult>((resolve, reject) => {
             fetch(url).then(res => res.json())
                 .then(data => {
                     resolve(data)
@@ -39,14 +58,14 @@ const PokemonsList = () => {
     useEffect(() => {
         async function fetchData() {
             let response = await getAllPokemon(initialURL)
-            await loadPokemon(response.results);
+            await loadPokemon(response.result);
             setLoading(false);
         }
         fetchData();
     }, [])
 
 
-    const loadPokemon = async (data) => {
+    const loadPokemon = async (data: []) => {
         let _pokemonData = await Promise.all(data.map(async pokemon => {
             let pokemonRecord = await getPokemon(pokemon)
             return pokemonRecord

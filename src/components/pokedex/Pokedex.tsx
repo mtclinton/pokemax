@@ -8,11 +8,11 @@ function Pokedex() {
 
     const { pokedexPokemon } = useContext(PokemonContext);
 
-    const [evoSprites, setEvoSprite] = useState([]);
-    const [evoNames, setEvoNames] = useState([]);
+    const [evoSprites, setEvoSprite] = useState<[]>([]);
+    const [evoNames, setEvoNames] = useState<[]>([]);
     const [description, setDescription] = useState([]);
 
-    function pickRandom(arr) {
+    function pickRandom(arr: []) {
         return arr[Math.floor(Math.random() * arr.length)];
     }
 
@@ -73,9 +73,9 @@ function Pokedex() {
                                     const sprites = dataList.map(v => v.sprites.front_default);
                                     const names = dataList.map(n => n.name);
 
-                                    setEvoSprite(sprites)
+                                    setEvoSprite(sprites as [])
 
-                                    setEvoNames(names);
+                                    setEvoNames(names as []);
                                 });
                         });
                 });
