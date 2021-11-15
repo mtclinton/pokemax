@@ -3,6 +3,7 @@ import Divider from "./Divider";
 import LeftPanel from "./LeftPanel";
 import RightPanel from "./RightPanel";
 import {PokemonContext} from "../../hooks/PokemonContext";
+import axios, {AxiosResponse} from 'axios';
 
 function Pokedex() {
 
@@ -10,7 +11,7 @@ function Pokedex() {
 
     const [evoSprites, setEvoSprite] = useState<[]>([]);
     const [evoNames, setEvoNames] = useState<[]>([]);
-    const [description, setDescription] = useState([]);
+    const [description, setDescription] = useState("");
 
     function pickRandom(arr: []) {
         return arr[Math.floor(Math.random() * arr.length)];
