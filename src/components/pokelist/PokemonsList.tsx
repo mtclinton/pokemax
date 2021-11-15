@@ -38,7 +38,7 @@ const PokemonsList = () => {
     const initialURL = 'https://pokeapi.co/api/v2/pokemon'
 
     function getPokemon(pokemon: ApiPokemon ) {
-        return new Promise((resolve, reject) => {
+        return new Promise<Pokemon>((resolve, reject) => {
             fetch(pokemon.url).then(res => res.json())
                 .then(data => {
                     resolve(data)

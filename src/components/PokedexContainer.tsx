@@ -6,14 +6,14 @@ import {Pokemon} from "../types";
 
 // Pokemon type just has the name as an attribute
 
-function Card( pokemon: Pokemon ) {
+function Card( name: string ) {
     return (
         <div className="Card">
             <div className="img">
-                <img src={`https://projectpokemon.org/images/normal-sprite/${pokemon.name}.gif`} alt="" />
+                <img src={`https://projectpokemon.org/images/normal-sprite/${name}.gif`} alt="" />
             </div>
             <div className="name">
-                {pokemon.name}
+                {name}
             </div>
         </div>
     );
@@ -30,8 +30,8 @@ const PokedexContainer = () => {
 
 
             <div className="captured-container">
-                {capturedPokemons.map((pokemon, i) => {
-                    return <Card  name={pokemon}/>
+                {capturedPokemons.map((pokemon: Pokemon, i) => {
+                    return <Card {...pokemon.name}/>
                 })}
             </div>
         </div>
