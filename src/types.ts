@@ -7,6 +7,11 @@
 //
 // }
 
+export interface PNProp {
+    name: string
+    no: number
+}
+
 export interface Pokemon {
     abilities?: (Abilities)[] | null;
     base_experience: number;

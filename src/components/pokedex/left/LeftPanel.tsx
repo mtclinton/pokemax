@@ -2,21 +2,28 @@ import React, { useState, useEffect } from 'react';
 import PokemonName from "./PokemonName";
 import PokemonSprite from "./PokemonSprite";
 import PokemonDescription from "./PokemonDescription";
+import {PNProp} from "../../../types";
 
+import {Pokemon} from "../../../types";
 
-function LeftPanel(props) {
+interface LPProp {
+    pokemon: Pokemon
+    description: string
+}
+
+function LeftPanel(props: LPProp) {
 
     const {pokemon, description} = props;
 
-    let name;
-    let no;
+    let name: string;
+    let no: number;
 
-    if (pokemon && pokemon.length) {
+    if (pokemon) {
 
-        name = pokemon[0].name;
-        no = pokemon[0].id;
+        name = pokemon.name;
+        no = pokemon.id;
     } else {
-        name = 0;
+        name = "";
         no = 0;
 
     }
@@ -26,7 +33,7 @@ function LeftPanel(props) {
         <div className="panel left-panel">
             <PokemonName name={name} no={no} />
             <PokemonSprite src={name} />
-            <PokemonDescription description={description} />
+            <PokemonDescription {...description} />
         </div>
     );
 }

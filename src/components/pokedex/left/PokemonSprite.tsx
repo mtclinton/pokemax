@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import SpriteControls from "./SpriteControls";
 
-function PokemonSprite(props){
+interface SpriteProp{
+    src: string
+}
+
+function PokemonSprite(props: SpriteProp){
 
     let image;
 

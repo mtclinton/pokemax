@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 
-function PokemonName(props) {
+import {PNProp} from "../../../types";
+
+function PokemonName(props:PNProp) {
 
     let name;
     let no;
 
-    if (props.name) {
+    if (props.name != "") {
         name = props.name;
     } else {
         name = "Capture a Pokemon";

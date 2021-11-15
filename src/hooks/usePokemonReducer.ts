@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
 import { CAPTURE, RELEASE, ADD_POKEMON, ADD_POKEMONS, SHOW_POKEMON } from './actions';
-import PokemonStats from "../components/pokedex/PokemonStats";
+import PokemonStats from "../components/pokedex/right/PokemonStats";
 
 const getCapturedPokemons = (capturedPokemons: [], releasePokemon: string) =>
     capturedPokemons.filter(pokemon => pokemon !== releasePokemon)

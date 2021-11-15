@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
 import Divider from "./Divider";
-import LeftPanel from "./LeftPanel";
-import RightPanel from "./RightPanel";
+import LeftPanel from "./left/LeftPanel";
+import RightPanel from "./right/RightPanel";
 import {PokemonContext} from "../../hooks/PokemonContext";
 import axios, {AxiosResponse} from 'axios';
 

@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-function PokemonDescription(props) {
+function PokemonDescription(description: string) {
 
-    let description;
 
-    if (props.description) {
-        description = props.description;
+    if (description) {
 
     } else {
         description = "";
