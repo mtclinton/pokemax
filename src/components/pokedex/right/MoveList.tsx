@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import {Move} from "../../../types";
+import {Move, VersionGroupDetails} from "../../../types";
 
-function padStats(stat, val, sep, len) {
-    val = val || "xx";
+interface statsProp {
+    stat: string
+    val: number|string
+    sep: string
+    len: number
+}
+
+function PadStats(props: statsProp) {
+    // val = val || "xx";
     let output = `
-    ${stat.toString()}${sep.repeat(len - (val.toString().length + stat.toString().length))}${val.toString()}`;
-    return output;
+    ${props.stat.toString()}${props.sep.repeat(props.len - (props.val.toString().length + props.stat.toString().length))}${props.val.toString()}`;
+
+    return <span>{output}</span>;
 }
 
 function MovesLoading() {
@@ -15,9 +23,15 @@ function MovesLoading() {
                 <div className="move-name" style={{ textTransform: "none" }}>
                     xxxxx xxxxx
                 </div>
-                <div className="move-stat">{padStats("Accuracy", "xx", ".", 16)}</div>
-                <div className="move-stat">{padStats("Power", "xx", ".", 16)}</div>
-                <div className="move-stat">{padStats("PP", "xx", ".", 16)}</div>
+                <div className="move-stat">
+                    <PadStats stat={"Accuracy"} val={"xx"}  sep={"."} len={16} />
+                </div>
+                <div className="move-stat">
+                    <PadStats stat={"Power"} val={"xx"}  sep={"."} len={16} />
+                </div>
+                <div className="move-stat">
+                    <PadStats stat={"PP"} val={"xx"}  sep={"."} len={16} />
+                </div>
             </div>
             <div className="move-right">
                 <div className="move-type">Type: xxxxx</div>
@@ -28,14 +42,34 @@ function MovesLoading() {
     );
 }
 
-function MoveEntry(props) {
+interface MoveAPIData {
+    name: string
+    accuracy: number
+    power: number
+    pp: number
+    type: MoveAPIDataType
+}
+
+interface MoveAPIDataType {
+    name: string
+}
+
+interface MoveEntryProp {
+    name: string
+    accuracy: number
+    power: number
+    pp: number
+    type: MoveAPIDataType
+    lvl: number
+}
+
+function MoveEntry(props: MoveEntryProp) {
     console.log(props)
-    const move = props.move;
-    const name = move.name || move.names.filter(m => m.language.name === "en")[0].name;
-    const acc = move.accuracy;
-    const pow = move.power;
-    const pp = move.pp;
-    const type = move.type.name;
+    const name = props.name;
+    const acc = props.accuracy;
+    const pow = props.power;
+    const pp = props.pp;
+    const type = props.type.name;
     //   const status = "" || "---";˝
     const lvl = props.lvl;
     // console.log("move ", move);
@@ -43,9 +77,9 @@ function MoveEntry(props) {
         <div className="move-body move-screen screen">
             <div className="move-left">
                 <div className="move-name">{name}</div>
-                <div className="move-stat">{padStats("Accuracy", acc, ".", 16)}</div>
-                <div className="move-stat">{padStats("Power", pow, ".", 16)}</div>
-                <div className="move-stat">{padStats("PP", pp, ".", 16)}</div>
+                <PadStats stat={"Accuracy"} val={acc}  sep={"."} len={16} />
+                <PadStats stat={"Power"} val={pow}  sep={"."} len={16} />
+                <PadStats stat={"PP"} val={pp}  sep={"."} len={16} />
             </div>
             <div className="move-right">
                 <div className="move-type">Type: {type}</div>
@@ -62,14 +96,21 @@ interface movesProp {
 
 function MoveList(props: movesProp) {
 
+    let cm: MoveAPIData = {
+        name: "",
+        accuracy:0,
+        power: 0,
+        pp: 0,
+        type: {name:""},
+    }
     const moves = props.moves;
     const [index, setIndex] = useState(0);
-    const [currentMove, setCurrentMove] = useState({});
+    const [currentMove, setCurrentMove] = useState(cm);
     const [loading, setLoading] = useState(true);
     const [level, setLevel] = useState(0);
 
     async function getMove(url: string) {
-        return new Promise((resolve, reject) => {
+        return new Promise<MoveAPIData>((resolve, reject) => {
             fetch(url).then(res => res.json())
                 .then(data => {
                     resolve(data)
@@ -79,7 +120,8 @@ function MoveList(props: movesProp) {
 
     useEffect(() => {
         async function fetchMove() {
-            let response = await getMove(moves[index].url)
+            let response : MoveAPIData;
+            response = await getMove(moves[index].move.url)
             setCurrentMove(response);
             // console.log(moves[index].move.url)
             // console.log(response.results)
@@ -87,8 +129,8 @@ function MoveList(props: movesProp) {
             setLoading(false);
             if(
                 moves[index] && moves[index].version_group_details &&
-                moves[index].version_group_details.length &&
-                moves[index].version_group_details[0].level_learned_at
+                moves[index].version_group_details.length > 0 &&
+                typeof moves[index].version_group_details !== 'undefined'
             ){
                 setLevel(moves[index].version_group_details[0].level_learned_at);
             }
@@ -96,7 +138,7 @@ function MoveList(props: movesProp) {
         }
 
         if(moves && moves.length){
-            console.log('calling useeffect');
+            console.log('calling move useeffect');
 
             fetchMove();
 
@@ -139,7 +181,8 @@ function MoveList(props: movesProp) {
 
     return (
         <div className="move-list">
-            {loading ? <MovesLoading /> : <MoveEntry move={currentMove} lvl={level} />}
+            {loading ? <MovesLoading /> : <MoveEntry name={currentMove.name} accuracy={currentMove.accuracy}
+                                                     power={currentMove.power} pp={currentMove.pp} type={currentMove.type} lvl={level} />}
             <div className="move-controls">
                 <div className="move-arrow" onClick={prevMove}>
                     <i className="fas fa-caret-up" />

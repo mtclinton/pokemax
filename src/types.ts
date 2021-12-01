@@ -39,11 +39,16 @@ export interface Ability {
     url: string;
 }
 
-export interface Moves {
-    move: Move;
+export interface Move {
+    move: MoveName;
+    version_group_details: (VersionGroupDetails)[]
 }
 
-export interface Move {
+export interface VersionGroupDetails {
+    level_learned_at: number
+}
+
+export interface MoveName {
     name: string;
     url: string;
 }
