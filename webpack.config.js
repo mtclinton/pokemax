@@ -44,6 +44,7 @@ module.exports = {
                 use: ['@svgr/webpack'],
                 exclude: /node_modules/,
             },
+
         ]
     },
     output: {
@@ -69,6 +70,11 @@ module.exports = {
             chunkFilename: "[id]--[hash].css",
             ignoreOrder: false
         }),
+        new CopyPlugin({
+            patterns: [
+                {from: "public/origin", to: "origin"}
+            ]
+        })
     ],
     target: 'web'
 };

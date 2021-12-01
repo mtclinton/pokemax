@@ -11,7 +11,7 @@ interface ApiResult {
     count: number,
     next: string,
     previous: null|string,
-    result:[]
+    results:[]
 }
 
 interface CardProp {
@@ -58,7 +58,9 @@ const PokemonsList = () => {
     useEffect(() => {
         async function fetchData() {
             let response = await getAllPokemon(initialURL)
-            await loadPokemon(response.result);
+            console.log(response.results)
+
+            await loadPokemon(response.results);
             setLoading(false);
         }
         fetchData();
