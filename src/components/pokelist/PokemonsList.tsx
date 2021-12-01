@@ -15,15 +15,16 @@ interface ApiResult {
 }
 
 interface CardProp {
-    key: number,
+    hmm: number,
     pokemon: Pokemon,
     onClick: Function
 }
 
 function Card(props: CardProp) {
-    let { key, pokemon, onClick} = props;
+    let { hmm, pokemon, onClick} = props;
+    console.log(props)
     return (
-        <div className="Card">
+        <div className="Card" key={hmm}>
             <div className="img">
                 <img src={`origin/${pokemon.name}.gif`} height={150} width={150} alt="" onClick={onClick(pokemon)} />
             </div>
@@ -84,8 +85,8 @@ const PokemonsList = () => {
             <div>
                 {loading ? <h1 style={{ textAlign: 'center' }}>Loading...</h1> : (
                     <div className="container">
-                        {pokemons.map((pokemon, i) => {
-                            return <Card key={i} pokemon={pokemon} onClick={capture}/>
+                        {pokemons.map((pokemon, index) => {
+                            return <Card hmm={index} pokemon={pokemon} onClick={capture}/>
                         })}
                     </div>
                 )}

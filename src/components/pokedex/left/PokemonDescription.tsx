@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
-function PokemonDescription(description: string) {
+interface descriptionProp {
+    description: string
+}
 
-    return <div className="pokemon-description screen">{description}</div>;
+function PokemonDescription(props: descriptionProp) {
+
+    return <div className="pokemon-description screen">{props.description}</div>;
 }
 
 export default PokemonDescription;

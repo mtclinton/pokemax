@@ -9,7 +9,7 @@ function App() {
         <PokemonProvider>
             <div className="main">
                 <PokemonsList />
-                {/*<PokedexContainer />*/}
+                <PokedexContainer />
             </div>
 
         </PokemonProvider>

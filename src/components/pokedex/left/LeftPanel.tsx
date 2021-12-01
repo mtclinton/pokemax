@@ -33,7 +33,7 @@ function LeftPanel(props: LPProp) {
         <div className="panel left-panel">
             <PokemonName name={name} no={no} />
             <PokemonSprite src={name} />
-            <PokemonDescription {...description} />
+            <PokemonDescription description={description} />
         </div>
     );
 }
