@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import {Types} from "../../../types";
 
-function PokeBall(props) {
+function PokeBall() {
     return (
         <div className="pokemon-sprite pokemon-sprite-small empty-evo">
             <div className="poke-ball">
@@ -14,7 +15,7 @@ function PokeBall(props) {
     );
 }
 
-function PokemonSpriteSmall(props) {
+function PokemonSpriteSmall(props: pokemonSpriteSmallProp) {
     let evoImage;
 
     if (props.src) {
@@ -34,35 +35,62 @@ function PokemonSpriteSmall(props) {
     );
 }
 
-function PokemonEvolution(props) {
+interface evoProp {
+    sprites: []
+    names: []
+}
+
+interface pokemonSpriteSmallProp {
+    src: string
+    name: string
+    evo: string
+}
+
+export class EvoPokemon {
+    public name: string;
+    public sprite: string;
+    public evo: string
+    constructor(name:string, sprite:string, evo:string) {
+        this.name = name;
+        this.sprite = sprite;
+        this.evo = evo;
+    }
+}
+
+function PokemonEvolution(props: evoProp) {
 
     const {sprites, names} = props;
-    let e1 = "";
-    let e2 = "";
-    let e3 = "";
 
-    let n1 = "";
-    let n2 = "";
-    let n3 = "";
+    let evo_array: EvoPokemon[] = []
 
-    if(sprites && sprites.length) {
-        e1 = sprites[0];
-        e2 = sprites[1];
-        e3 = sprites[2];
-    }
+    {props.sprites.map((sprite: string, i: number) => {
+        props.names.map((name: string, j: number) => {
+            if(i==j){
+                let evo = ""
+                if(i == 0){
+                    evo = "I"
+                }
+                if(i == 1){
+                    evo = "II"
+                } else {
+                    evo = "II"
+                }
 
-    if(names && names.length) {
-        n1 = names[0];
-        n2 = names[1];
-        n3 = names[2];
-    }
+                let evoPokemon = {name:name, sprite:sprite, evo:evo};
+
+                evo_array.push(evoPokemon);
+
+            }
+        })
+    })}
+
 
     return (
         <div className="panel-row panel-evo">
             {/* <div className="panel-header evo-header">Evolutions</div> */}
-            <PokemonSpriteSmall src={e1} evo="I" name={n1} />
-            <PokemonSpriteSmall src={e2} evo="II" name={n2} />
-            <PokemonSpriteSmall src={e3} evo="III" name={n3} />
+            {evo_array.map((evop:EvoPokemon) => {
+                return <PokemonSpriteSmall src={evop.sprite} evo={evop.evo} name={evop.name} />
+            })}
         </div>
     );
 }

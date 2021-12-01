@@ -32,7 +32,7 @@ function Card(props: CardProp) {
 }
 
 const PokemonsList = () => {
-    const { pokemons, capture, addPokemons } = useContext(PokemonContext);
+    const { pokemons, capture, addPokemon } = useContext(PokemonContext);
 
     const [loading, setLoading] = useState(true);
     const initialURL = 'https://pokeapi.co/api/v2/pokemon'
@@ -70,7 +70,9 @@ const PokemonsList = () => {
             let pokemonRecord = await getPokemon(pokemon)
             return pokemonRecord
         }))
-        addPokemons(_pokemonData);
+        _pokemonData.map((pokemon, i) => {
+            addPokemon(pokemon)
+        });
     }
 
     return (

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {Move} from "../../../types";
 
 function padStats(stat, val, sep, len) {
     val = val || "xx";
@@ -55,7 +56,11 @@ function MoveEntry(props) {
     );
 }
 
-function MoveList(props) {
+interface movesProp {
+    moves: (Move)[]
+}
+
+function MoveList(props: movesProp) {
 
     const moves = props.moves;
     const [index, setIndex] = useState(0);
@@ -63,7 +68,7 @@ function MoveList(props) {
     const [loading, setLoading] = useState(true);
     const [level, setLevel] = useState(0);
 
-    async function getMove(url) {
+    async function getMove(url: string) {
         return new Promise((resolve, reject) => {
             fetch(url).then(res => res.json())
                 .then(data => {
@@ -74,7 +79,7 @@ function MoveList(props) {
 
     useEffect(() => {
         async function fetchMove() {
-            let response = await getMove(moves[index].move.url)
+            let response = await getMove(moves[index].url)
             setCurrentMove(response);
             // console.log(moves[index].move.url)
             // console.log(response.results)

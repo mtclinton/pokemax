@@ -9,7 +9,7 @@ function PokemonSprite(props: SpriteProp){
 
     let image;
 
-    if (props.src) {
+    if (props.src != "") {
         image = <img src={`origin/${props.src}.gif`} alt="pokemon" className="pokemon-sprite" />
 
     } else {

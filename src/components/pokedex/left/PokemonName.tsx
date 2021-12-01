@@ -13,7 +13,7 @@ function PokemonName(props:PNProp) {
         name = "Capture a Pokemon";
     }
 
-    if (props.no) {
+    if (props.no == 0) {
         no = <span className="name-no">no. {props.no}</span>;
     } else {
         no = <span className="name-no"></span>;

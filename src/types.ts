@@ -19,14 +19,14 @@ export interface Pokemon {
     id: number;
     is_default: boolean;
     location_area_encounters: string;
-    moves?: (Moves)[] | null;
+    moves?: [] | null;
     name: string;
     order: number;
     past_types?: (null)[] | null;
     species: Species;
     sprites: Sprites;
-    stats?: (Stats)[] | null;
-    types?: (Types)[] | null;
+    stats?: [] | null;
+    types?: [] | null;
     weight: number;
 }
 export interface Abilities {

@@ -5,48 +5,54 @@ import PokemonEvolution from "./PokemonEvolution";
 import ButtonChrome from "./ButtonChrome";
 import MoveList from "./MoveList";
 import PokedexControls from "./PokedexControls";
+import {Pokemon} from "../../../types";
+
+interface RPProp {
+    pokemon: Pokemon|null
+    evoSprites: []
+    evoNames: []
+}
 
 
-function RightPanel(props) {
+
+function RightPanel(props: RPProp) {
 
     const {pokemon, evoSprites, evoNames} = props;
 
-    let stats;
-    let types;
+    let stats: [] = [];
+    let types: [] = [];
 
-    let sprites;
-    let names;
+    let sprites: [] = [];
+    let names: [] = [];
 
-    let moves;
+    let moves: [] = [];
 
-    if(pokemon && pokemon.length) {
-        stats = pokemon[0].stats;
+    if(pokemon != null) {
+        if (pokemon.stats != null){
+            stats = pokemon.stats;
+        }
     } else {
-        stats = "";
+        stats = []
     }
 
-    if(pokemon && pokemon.length) {
-        types = pokemon[0].types;
-    } else {
-        types = "";
+    if(pokemon != null) {
+        if (pokemon.types != null){
+            types = pokemon.types;
+        }
     }
 
     if(evoSprites && evoSprites.length) {
         sprites = evoSprites;
-    } else {
-        sprites = [];
     }
 
     if(evoNames && evoNames.length) {
         names = evoNames;
-    } else {
-        names = [];
     }
 
-    if(pokemon && pokemon.length) {
-        moves = pokemon[0].moves;
-    } else {
-        moves = [];
+    if(pokemon != null) {
+        if (pokemon.moves != null){
+            moves = pokemon.moves;
+        }
     }
 
     return (

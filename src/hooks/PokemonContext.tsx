@@ -1,6 +1,7 @@
 import React, { createContext } from 'react';
 import { usePokemonReducer } from './usePokemonReducer';
 import { CAPTURE, RELEASE, ADD_POKEMON, ADD_POKEMONS, SHOW_POKEMON } from './actions';
+import {Pokemon} from "../types";
 
 
 type Props = {
@@ -10,35 +11,37 @@ type Props = {
 interface ProviderType {
     pokemons: [],
     capturedPokemons: [],
-    pokedexPokemon: [],
+    pokedexPokemon: Pokemon|null,
     capture: Function,
     release: Function,
     show: Function,
     addPokemon: Function,
-    addPokemons: Function
+    // addPokemons: Function
 }
 
 const PokemonContext = createContext<ProviderType>({
     pokemons: [],
     capturedPokemons: [],
-    pokedexPokemon: [],
+    pokedexPokemon: null,
     capture: Function,
     release: Function,
     show: Function,
     addPokemon: Function,
-    addPokemons: Function
+    // addPokemons: Function
 });
 
 const PokemonProvider = ({ children }: Props) => {
     const [state, dispatch] = usePokemonReducer();
     const { pokemons, capturedPokemons, pokedexPokemon } = state;
 
-    const capture = (pokemon: string) => () => dispatch({ type: CAPTURE,pokemon: pokemon,pokemons:[] });
-    const release = (pokemon: string) => () => dispatch({ type: RELEASE,pokemon: pokemon,pokemons:[]  });
-    const show = (pokemon: string) => dispatch({ type: SHOW_POKEMON,pokemon: pokemon,pokemons:[]  });
+    const capture = (pokemon: Pokemon) => () => dispatch({ type: CAPTURE, pokemon: pokemon,pokemons:[] });
+    const release = (pokemon: Pokemon) => () => dispatch({ type: RELEASE, pokemon: pokemon,pokemons:[]  });
+    const show = (pokemon: Pokemon) => dispatch({ type: SHOW_POKEMON, pokemon: pokemon,pokemons:[]  });
 
-    const addPokemon = (pokemon: string) => dispatch({ type: ADD_POKEMON,pokemon: pokemon,pokemons:[]  });
-    const addPokemons = (pokemons: []) => dispatch({ type: ADD_POKEMONS,pokemon: '',pokemons:pokemons  });
+    const addPokemon = (pokemon: Pokemon) => dispatch({ type: ADD_POKEMON, pokemon: pokemon,pokemons:[]  });
+    // pass empty pokemon may need to refactor this
+
+    // const addPokemons = (pokemons: []) => dispatch({ type: ADD_POKEMONS, pokemon: null,pokemons:pokemons  });
 
 
     const providerValue = {
@@ -49,7 +52,7 @@ const PokemonProvider = ({ children }: Props) => {
         release,
         show,
         addPokemon,
-        addPokemons
+        // addPokemons
     };
 
     return (

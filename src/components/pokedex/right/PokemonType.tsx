@@ -1,26 +1,28 @@
 import React, { useState, useEffect } from 'react';
+import {Types} from "../../../types";
 
-function Type(props) {
-    return <div className={"type " + props.type}>{props.type}</div>;
+interface typeProp {
+    types: []
 }
 
-function PokemonType(props) {
+interface typeRenderProp {
+    name: string
+}
 
-    let types;
+function Type(props: typeRenderProp) {
+    return <div className={"type " + props.name}>{props.name}</div>;
+}
 
-    if (props.types) {
-        types = props.types;
-    } else {
-        types = [];
-    }
+function PokemonType(props: typeProp) {
+
+
 
     return (
         <div className="type-list">
             <div className="panel-header">Types</div>
             <div className="type-box">
-                {types.map(t => {
-                    const type = t.type.name;
-                    return <Type type={type} key={type} />;
+                {props.types.map((t: Types) => {
+                    return <Type name={t.type.name}  />;
                 })}
             </div>
             {/* <div className="panel-header">Evolutions</div> */}

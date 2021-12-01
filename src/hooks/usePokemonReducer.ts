@@ -1,49 +1,50 @@
 import { useReducer } from 'react';
 import { CAPTURE, RELEASE, ADD_POKEMON, ADD_POKEMONS, SHOW_POKEMON } from './actions';
 import PokemonStats from "../components/pokedex/right/PokemonStats";
+import {Pokemon} from "../types";
 
-const getCapturedPokemons = (capturedPokemons: [], releasePokemon: string) =>
+const getCapturedPokemons = (capturedPokemons: [], releasePokemon: Pokemon) =>
     capturedPokemons.filter(pokemon => pokemon !== releasePokemon)
 
-const releasePokemon = (releasePokemon: string, state: PokemonState) => ({
+const releasePokemon = (releasePokemon: Pokemon, state: PokemonState) => ({
     pokemons: [...state.pokemons, releasePokemon],
     capturedPokemons: getCapturedPokemons(state.capturedPokemons, releasePokemon)
 });
 
-const getPokemonsList = (pokemons: [], capturedPokemon: string) =>
+const getPokemonsList = (pokemons: [], capturedPokemon: Pokemon) =>
     pokemons.filter(pokemon => pokemon !== capturedPokemon)
 
-const capturePokemon = (pokemon: string, state: PokemonState) => ({
+const capturePokemon = (pokemon: Pokemon, state: PokemonState) => ({
     pokemons: getPokemonsList(state.pokemons, pokemon),
     capturedPokemons: [...state.capturedPokemons, pokemon],
-    pokedexPokemon: [pokemon]
+    pokedexPokemon: pokemon
 });
 
-const showPokemon = (pokemon: string, state: PokemonState) => ({
+const showPokemon = (pokemon: Pokemon, state: PokemonState) => ({
     pokemons: state.pokemons,   /// don't change the pokemons state just changing which pokemon is shown on pokedex
     capturedPokemons: state.capturedPokemons,
-    pokedexPokemon: [pokemon]
+    pokedexPokemon: pokemon
 });
 
-const addPokemon = (pokemon: string, state: PokemonState) => ({
+const addPokemon = (pokemon: Pokemon, state: PokemonState) => ({
     pokemons: [...state.pokemons, pokemon],
     capturedPokemons: state.capturedPokemons
 });
 
-const addPokemons = (pokemons: [], state: PokemonState) => ({
-    pokemons: pokemons,
-    capturedPokemons: state.capturedPokemons
-});
+// const addPokemons = (pokemons: [], state: PokemonState) => ({
+//     pokemons: pokemons,
+//     capturedPokemons: state.capturedPokemons
+// });
 
 interface PokemonState {
     pokemons: [],
     capturedPokemons: [],
-    pokedexPokemon: []
+    pokedexPokemon: Pokemon|null
 }
 
 interface PokemonAction {
     type: string
-    pokemon: string
+    pokemon: Pokemon
     pokemons: []
 }
 
@@ -57,8 +58,8 @@ const pokemonReducer = (state: PokemonState, action: PokemonAction): PokemonStat
             return showPokemon(action.pokemon, state) as PokemonState;
         case ADD_POKEMON:
             return addPokemon(action.pokemon, state) as PokemonState;
-        case ADD_POKEMONS:
-            return addPokemons(action.pokemons, state) as PokemonState;
+        // case ADD_POKEMONS:
+        //     return addPokemons(action.pokemons, state) as PokemonState;
         default:
             return state;
     }
@@ -68,5 +69,5 @@ export const usePokemonReducer = () =>
     useReducer(pokemonReducer, {
         pokemons: [],
         capturedPokemons: [],
-        pokedexPokemon: []
+        pokedexPokemon: null
     });

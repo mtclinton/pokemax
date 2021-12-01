@@ -7,7 +7,7 @@ import {PNProp} from "../../../types";
 import {Pokemon} from "../../../types";
 
 interface LPProp {
-    pokemon: Pokemon
+    pokemon: Pokemon|null
     description: string
 }
 
@@ -18,7 +18,7 @@ function LeftPanel(props: LPProp) {
     let name: string;
     let no: number;
 
-    if (pokemon) {
+    if (pokemon != null) {
 
         name = pokemon.name;
         no = pokemon.id;
