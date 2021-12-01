@@ -64,11 +64,23 @@ interface MoveEntryProp {
 }
 
 function MoveEntry(props: MoveEntryProp) {
+
     console.log(props)
+
     const name = props.name;
-    const acc = props.accuracy;
-    const pow = props.power;
-    const pp = props.pp;
+    let acc = 0;
+    let pow = 0;
+    let pp = 0;
+    if(props.accuracy){
+        const acc =props.accuracy
+    }
+    if(props.power){
+        const pow =props.power
+    }
+    if(props.pp){
+        const pp =props.pp
+    }
+
     const type = props.type.name;
     //   const status = "" || "---";˝
     const lvl = props.lvl;
@@ -138,7 +150,9 @@ function MoveList(props: movesProp) {
         }
 
         if(moves && moves.length){
+/*
             console.log('calling move useeffect');
+*/
 
             fetchMove();
 

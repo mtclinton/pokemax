@@ -88,8 +88,8 @@ function PokemonEvolution(props: evoProp) {
     return (
         <div className="panel-row panel-evo">
             {/* <div className="panel-header evo-header">Evolutions</div> */}
-            {evo_array.map((evop:EvoPokemon) => {
-                return <PokemonSpriteSmall src={evop.sprite} evo={evop.evo} name={evop.name} />
+            {evo_array.map((evop:EvoPokemon, i) => {
+                return <PokemonSpriteSmall src={evop.sprite} evo={evop.evo} name={evop.name} key={i}/>
             })}
         </div>
     );

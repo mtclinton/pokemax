@@ -21,8 +21,8 @@ function PokemonType(props: typeProp) {
         <div className="type-list">
             <div className="panel-header">Types</div>
             <div className="type-box">
-                {props.types.map((t: Types) => {
-                    return <Type name={t.type.name}  />;
+                {props.types.map((t: Types, i) => {
+                    return <Type name={t.type.name} key={i} />;
                 })}
             </div>
             {/* <div className="panel-header">Evolutions</div> */}

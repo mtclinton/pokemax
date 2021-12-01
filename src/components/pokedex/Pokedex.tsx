@@ -111,17 +111,17 @@ function Pokedex() {
 
     useEffect(() => {
 
-        if(pokedexPokemon != null){
 
-
-
-
-        }
 
         async function fetchData() {
-            let pokemonSpeciesApiData = await pokemonSpecies(pokedexPokemon)
-            await settingDescription(pokemonSpeciesApiData)
-            await getEvoChain(pokedexPokemon, pokemonSpeciesApiData)
+            if(pokedexPokemon != null){
+                let pokemonSpeciesApiData = await pokemonSpecies(pokedexPokemon)
+                await settingDescription(pokemonSpeciesApiData)
+                await getEvoChain(pokedexPokemon, pokemonSpeciesApiData)
+
+
+            }
+
         }
         fetchData();
 

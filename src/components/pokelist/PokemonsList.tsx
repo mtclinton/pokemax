@@ -15,16 +15,14 @@ interface ApiResult {
 }
 
 interface CardProp {
-    hmm: number,
     pokemon: Pokemon,
     onClick: Function
 }
 
 function Card(props: CardProp) {
-    let { hmm, pokemon, onClick} = props;
-    console.log(props)
+    let {  pokemon, onClick} = props;
     return (
-        <div className="Card" key={hmm}>
+        <div className="Card">
             <div className="img">
                 <img src={`origin/${pokemon.name}.gif`} height={150} width={150} alt="" onClick={onClick(pokemon)} />
             </div>
@@ -59,8 +57,6 @@ const PokemonsList = () => {
     useEffect(() => {
         async function fetchData() {
             let response = await getAllPokemon(initialURL)
-            console.log(response.results)
-
             await loadPokemon(response.results);
             setLoading(false);
         }
@@ -86,7 +82,7 @@ const PokemonsList = () => {
                 {loading ? <h1 style={{ textAlign: 'center' }}>Loading...</h1> : (
                     <div className="container">
                         {pokemons.map((pokemon, index) => {
-                            return <Card hmm={index} pokemon={pokemon} onClick={capture}/>
+                            return <Card pokemon={pokemon} onClick={capture} key={index}/>
                         })}
                     </div>
                 )}
