@@ -4,18 +4,20 @@ import Pokedex from "./pokedex/Pokedex";
 
 import {Pokemon} from "../types";
 
-// Pokemon type just has the name as an attribute
-interface cardProp {
-    name: string
+interface CardProp {
+    pokemon: Pokemon,
+    onClick: Function
 }
-function Card( props: cardProp ) {
+
+function Card(props: CardProp) {
+    let {  pokemon, onClick} = props;
     return (
         <div className="Card">
             <div className="img">
-                <img src={`https://projectpokemon.org/images/normal-sprite/${props.name}.gif`} alt="" />
+                <img src={`https://projectpokemon.org/images/normal-sprite/${props.pokemon.name}.gif`} alt="" onClick={onClick(pokemon)} />
             </div>
             <div className="name">
-                {props.name}
+                {props.pokemon.name}
             </div>
         </div>
     );
@@ -33,7 +35,7 @@ const PokedexContainer = () => {
 
             <div className="captured-container">
                 {capturedPokemons.map((pokemon: Pokemon, i) => {
-                    return <Card name={pokemon.name} key={i}/>
+                    return <Card pokemon={pokemon} onClick={release} key={i}/>
                 })}
             </div>
         </div>
