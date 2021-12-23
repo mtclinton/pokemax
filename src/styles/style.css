@@ -166,6 +166,9 @@ code {
   margin: 10px 0;
   box-sizing: border-box;
   background: linear-gradient(15deg, #cad5b5 64%, #dde2d4 70%, #dde2d4 81%, #fff 86%, #dde2d4 89%, #dde2d4 100%);
+
+  height: 270px;
+  width: 350px;
 }
 .sprite-controls {
   display: flex;
