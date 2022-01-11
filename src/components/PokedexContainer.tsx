@@ -14,7 +14,7 @@ function Card(props: CardProp) {
     return (
         <div className="Card">
             <div className="img">
-                <img src={`https://projectpokemon.org/images/normal-sprite/${props.pokemon.name}.gif`} alt="" onClick={onClick(pokemon)} />
+                <img src={`https://projectpokemon.org/images/normal-sprite/${props.pokemon.name}.gif`} height={50} width={50} alt="" onClick={onClick(pokemon)} />
             </div>
             <div className="name">
                 {props.pokemon.name}
